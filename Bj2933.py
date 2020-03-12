@@ -1,5 +1,5 @@
 # 2933 미네랄 https://www.acmicpc.net/problem/2933
-# 런타임에러
+# 185584 KB, 956 ms
 
 '''
 height = 막대를 던지는 높이
@@ -7,20 +7,28 @@ direction = 막대를 던지는 방향. True = 왼쪽, False = 오른쪽
 '''
 def removeCluster(height, direction):
     height = r - height
+    isRemoved = False
     # 클러스터 제거
     if direction:  # 막대 방향 = 왼쪽
         for i in range(c):
             if cave[height][i]:
                 cave[height][i] = False
+                isRemoved = True
                 break
     else:  # 막대 방향 = 오른쪽
         for i in range(c - 1, -1, -1):
             if cave[height][i]:
                 cave[height][i] = False
+                isRemoved = True
                 break
+    if not isRemoved:
+        return
 
     # 클러스터 떨어뜨리기
     global isFloat
+    # copy를 사용하는면 속도가 더 느리다.
+    # import copy
+    # isFloat = copy.deepcopy(cave)
     isFloat = [[False] * c for _ in range(r)]
     for i in range(r):
         for j in range(c):
@@ -60,7 +68,7 @@ def downCluster():
             if isFloat[i][j]:
                 cave[i + downCount][j] = True
 
-# 공중에 떠있는 클러스터 검사
+# 공중에 떠있는 클러스터 검사 (dfs)
 def check(x, y):
     isFloat[x][y] = False
     if x - 1 >= 0 and isFloat[x - 1][y]:
@@ -90,10 +98,10 @@ if __name__ == '__main__':
     throwHeights = list(map(int, input().split()))
 
     isFloat = []
-    for i in range(n):
+    for i in range(n): # 막대 던지기
         removeCluster(throwHeights[i], i % 2 == 0)
 
-    for i in cave:
+    for i in cave: # 출력
         for j in i:
             if j:
                 print('x', end='')
