@@ -6,13 +6,18 @@ def charToNum(c):
 
 def next(x, y, cnt):
     global answer
-    if 0 <= x < r and 0 <= y < c and not isUsed[charToNum(alphabets[x][y])]:
-        isUsed[charToNum(alphabets[x][y])] = True
+    ctn = ''
+    check = False
+    if 0 <= x < r and 0 <= y < c:
+        ctn = charToNum(alphabets[x][y])
+        check = True
+    if check and not isUsed[ctn]:
+        isUsed[ctn] = True
         next(x, y+1, cnt+1)
         next(x, y-1, cnt+1)
         next(x-1, y, cnt+1)
         next(x+1, y, cnt+1)
-        isUsed[charToNum(alphabets[x][y])] = False
+        isUsed[ctn] = False
     else:
         if cnt > answer:
             answer = cnt
