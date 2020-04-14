@@ -3,7 +3,7 @@
 
 def dfs(start, sum, aeiou):
     if sum == l:
-        if aeiou > 0 and l-aeiou > 1:
+        if aeiou > 0 and l-aeiou > 1: # 모음 1개 이상, 자음 2개 이상
             for i in range(c):
                 if isVisited[i]:
                     print(alphabets[i], end='')
@@ -20,7 +20,7 @@ def dfs(start, sum, aeiou):
             isVisited[i] = False
 
 if __name__ == '__main__':
-    AEIOU = ['a', 'e', 'i', 'o', 'u']
+    AEIOU = ['a', 'e', 'i', 'o', 'u'] # 모음
     l, c = map(int, input().split())  # 3 <= l <= c <= 15
     alphabets = sorted(list(map(str, input().split())))
     isVisited = [False] * c
