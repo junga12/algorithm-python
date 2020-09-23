@@ -1,9 +1,12 @@
 # https://www.acmicpc.net/problem/1753
-# 58068 KB, 724 ms
+# 57904 KB, 696 ms
 
 import sys
 import heapq
 INF = 200000000  # 문제에 나온 조건보다 큰 수
+
+def make_string(list):
+    return "\n".join(map(lambda x:"INF" if x == INF else str(x), vertexs))
 
 if __name__ == '__main__':
     v, e = map(int, sys.stdin.readline().split())
@@ -28,4 +31,4 @@ if __name__ == '__main__':
                 vertexs[_v] = distance + _w
                 heapq.heappush(hq, (vertexs[_v], _v))
 
-    print("\n".join(map(lambda x:"INF" if x == INF else str(x), vertexs)))
+    print(make_string(vertexs))
